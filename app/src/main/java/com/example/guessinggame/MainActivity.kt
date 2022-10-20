@@ -26,12 +26,54 @@ class MainActivity : AppCompatActivity() {
         buttonLeft.setText(leftNum.toString())
         buttonRight.setText(rightNum.toString())
 
-        buttonLeft.setOnClickListener{
+
+
+        // game score
+        var score = 0
+
+        buttonLeft.setOnClickListener {
             Toast.makeText(this@MainActivity, "You clicked Left", Toast.LENGTH_SHORT).show()
+            leftNum = buttonLeft.getText().toString().toInt()
+            if(leftNum > rightNum) {
+                score++
+            }
+            else {
+                score --
+            }
+            scoreViewText.setText("Score: " + score)
+
+            leftNum = Random.nextInt(0,10)
+            rightNum = Random.nextInt(0,10)
+
+            while(leftNum == rightNum) {
+                rightNum = Random.nextInt(0,10)
+            }
+
+            buttonLeft.setText(leftNum.toString())
+            buttonRight.setText(rightNum.toString())
         }
 
         buttonRight.setOnClickListener{
             Toast.makeText(this@MainActivity, "You clicked Right", Toast.LENGTH_SHORT).show()
+            rightNum = buttonRight.getText().toString().toInt()
+
+            if(leftNum < rightNum) {
+                score++
+            }
+            else {
+                score --
+            }
+            scoreViewText.setText("Score: " + score)
+
+            leftNum = Random.nextInt(0,10)
+            rightNum = Random.nextInt(0,10)
+
+            while(leftNum == rightNum) {
+                rightNum = Random.nextInt(0,10)
+            }
+
+            buttonLeft.setText(leftNum.toString())
+            buttonRight.setText(rightNum.toString())
         }
     }
 }
